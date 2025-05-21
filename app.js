@@ -13,10 +13,11 @@ const dbUrl = process.env.MONGO_URI;
 main().then(()=>
 {
     console.log("connected");
-}).catch
+}).catch((err)=>
 {
-    console.error("err")
-}
+    console.error("err");
+})
+
 
 async function main()
 {
