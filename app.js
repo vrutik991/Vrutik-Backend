@@ -31,7 +31,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
 // Serve static files from React
-app.use(express.static(path.join(__dirname, '/dist')));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 // app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(cors(
@@ -49,6 +49,11 @@ app.post("/send-notification", async(req, res) => {
     const { name, email, subject, message } = req.body;
     const newFeedback = new Feedback({name,email,subject,message});
     await newFeedback.save();
+})
+
+app.get("/about",(req,res)=>
+{
+    res.send("Hello about");
 })
 
 // This should be the last route:
