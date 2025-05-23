@@ -17,7 +17,6 @@ main().then(()=>
     console.error("err");
 })
 
-
 async function main()
 {
    await mongoose.connect(dbUrl);
@@ -25,12 +24,12 @@ async function main()
 
 const PORT = 1000;
 
-app.use(express.static(path.join(__dirname, "/public")));
+
+app.use(express.static(path.join(__dirname, 'dist')));
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
 // Serve static files from React
-app.use(express.static(path.join(__dirname, 'dist')));
 
 // app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(cors(
@@ -52,12 +51,20 @@ app.post("/send-notification", async(req, res) => {
     res.sendStatus(200);
 })
 
-app.get("/about",(req,res)=>
-{
-    res.send("Hello about");
-})
-
 // This should be the last route:
+
+app.use((req, res, next) => {
+  console.log("Incoming request for:", req.path);
+  next();
+});
+
+
+// app.get('*', (req, res) => {
 app.get(/.*/, (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    try {
+      res.sendFile('index.html', { root: path.join(__dirname, 'dist') });
+  } catch (err) {
+    console.error("Error sending index.html:", err);
+    res.status(500).send("Error serving frontend");
+  }
 });
