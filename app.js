@@ -24,12 +24,12 @@ async function main()
 
 const PORT = 1000;
 
-
-app.use(express.static(path.join(__dirname, 'dist')));
+// Serve static files from React
+app.use(express.static(path.join(__dirname, '/dist')));
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
-// Serve static files from React
+
 
 // app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(cors(
