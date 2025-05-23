@@ -52,11 +52,6 @@ app.post("/send-notification", async(req, res) => {
     res.sendStatus(200);
 })
 
-app.get("/about",(req,res)=>
-{
-    res.send("Hello about");
-})
-
 // This should be the last route:
 app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
