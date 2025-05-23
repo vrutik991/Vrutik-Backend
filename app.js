@@ -5,7 +5,6 @@ const app = express();
 const path = require('path');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const feedBack = require('./models/feedback.js');
 const Feedback = require('./models/feedback.js');
 
 const dbUrl = process.env.MONGO_URI;
@@ -24,7 +23,7 @@ async function main()
    await mongoose.connect(dbUrl);
 }
 
-const PORT = "1000"
+const PORT = 1000;
 
 app.use(express.static(path.join(__dirname, "/public")));
 app.use(express.urlencoded({ extended: false }))
@@ -37,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.use(cors(
     { 
         origin: process.env.FRONTEND_URL,
-        credentials:true, 
+        credentials:true,
     }
 ));
 
@@ -46,9 +45,11 @@ app.listen(PORT, (req, res) => {
 })
 
 app.post("/send-notification", async(req, res) => {
+    console.log("hello");
     const { name, email, subject, message } = req.body;
     const newFeedback = new Feedback({name,email,subject,message});
     await newFeedback.save();
+    res.sendStatus(200);
 })
 
 app.get("/about",(req,res)=>
