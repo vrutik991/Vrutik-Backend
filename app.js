@@ -33,10 +33,10 @@ app.use(express.json())
 
 // app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(cors(
-    { 
-        origin: process.env.FRONTEND_URL,
-        credentials:true,
-    }
+    // { 
+    //     origin: process.env.FRONTEND_URL,
+    //     credentials:true,
+    // }
 ));
 
 app.listen(PORT, (req, res) => {
@@ -63,6 +63,7 @@ app.use((req, res, next) => {
 app.get(/.*/, (req, res) => {
     try {
       res.sendFile('index.html', { root: path.join(__dirname, 'dist') });
+    //   console.log('index.html', { root: path.join(__dirname, 'dist') });
   } catch (err) {
     console.error("Error sending index.html:", err);
     res.status(500).send("Error serving frontend");
