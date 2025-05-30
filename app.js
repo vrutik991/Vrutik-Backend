@@ -60,12 +60,12 @@ app.use((req, res, next) => {
 
 
 // app.get('*', (req, res) => {
-app.get(/.*/, (req, res) => {
-    try {
-      res.sendFile('index.html', { root: path.join(__dirname, 'dist') });
-    //   console.log('index.html', { root: path.join(__dirname, 'dist') });
-  } catch (err) {
-    console.error("Error sending index.html:", err);
-    res.status(500).send("Error serving frontend");
-  }
-});
+// app.get(/.*/, (req, res) => {
+//     try {
+//       res.sendFile('index.html', { root: path.join(__dirname, 'dist') });
+//     //   console.log('index.html', { root: path.join(__dirname, 'dist') });
+//   } catch (err) {
+//     console.error("Error sending index.html:", err);
+//     res.status(500).send("Error serving frontend");
+//   }
+// });
